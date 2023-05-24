@@ -1,5 +1,6 @@
 import ResultDAO from "../db/dao/result.dao";
 import { Result } from "../db/models/Result";
+import { IResult } from "../interface/Result.interface";
 
 class ResultService {
     private resultDAO: ResultDAO;
@@ -7,8 +8,18 @@ class ResultService {
         this.resultDAO = resultDAO;
     }
 
-    public async makeResult(email: string): Promise<void> {
-        //
+    public async addNewResult(payload: IResult): Promise<boolean> {
+        try {
+            await this.resultDAO.createResult(payload);
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+
+    public async getAllResults(): Promise<Result[]> {
+        return await this.resultDAO.getAllResults();
     }
 }
 

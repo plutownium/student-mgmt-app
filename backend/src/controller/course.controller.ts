@@ -5,6 +5,8 @@ import express, { Request, Response } from "express";
 import { HealthCheck } from "../enum/healthCheck.enum";
 import CourseService from "../service/course.service";
 import { handleErrorResponse } from "../util/handleErrorResponse";
+import { isNonEmptyString, isStringInteger } from "../validation/inputValidation";
+import CourseDAO from "../db/dao/course.dao";
 
 class CourseController {
     public path = "/course";
@@ -21,7 +23,10 @@ class CourseController {
 
     public async createCourse(request: Request, response: Response) {
         try {
-            return response.status(200).json({});
+            const { courseName } = request.body;
+            const validCourseName = isNonEmptyString(courseName);
+            const newCourse = await this.courseService.makeCourse({ courseName: validCourseName });
+            return response.status(200).json({ newCourse });
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -29,8 +34,8 @@ class CourseController {
 
     public async getAllCourses(request: Request, response: Response) {
         try {
-            //
-            return response.status(200).json({});
+            const courses = await this.courseService.getAllCourses();
+            return response.status(200).json({ courses });
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -38,7 +43,10 @@ class CourseController {
 
     public async deleteCourse(request: Request, response: Response) {
         try {
-            return response.status(200).json({});
+            const courseIdInput = request.params.courseid;
+            const courseId = isStringInteger(courseIdInput);
+            const deleted = await this.courseService.deleteCourse(courseId);
+            return response.status(200).json({ deleted });
         } catch (err) {
             return handleErrorResponse(response, err);
         }

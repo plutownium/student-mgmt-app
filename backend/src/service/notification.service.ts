@@ -17,6 +17,14 @@ class NotificationService {
         this.makeNotification(notificationText);
     }
 
+    public async getAllUnreadNotifications(): Promise<Notification[]> {
+        return await this.notificationDAO.getAllUnreadNotifications();
+    }
+
+    public async markRead(notificationId: number): Promise<void> {
+        await this.notificationDAO.markRead(notificationId);
+    }
+
     private async makeNotification(text: string): Promise<void> {
         await this.notificationDAO.createNotification({ text, seen: false });
     }
