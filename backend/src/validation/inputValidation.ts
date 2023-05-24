@@ -4,7 +4,7 @@ const nonEmptyString = z.string().nonempty();
 const stringSchema = z.string();
 const emailSchema = z.string().email();
 const numberSchema = z.number();
-const dateSchema = z.date();
+const dateSchema = z.coerce.date();
 const stringArr = z.array(z.string());
 const intArr = z.array(z.number());
 

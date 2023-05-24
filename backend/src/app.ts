@@ -22,6 +22,7 @@ class App {
                 credentials: true,
             }),
         );
+        this.app.use(bodyParser.json());
         this.routes(appInit.controllers);
     }
 

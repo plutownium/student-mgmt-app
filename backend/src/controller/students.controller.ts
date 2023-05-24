@@ -16,13 +16,14 @@ class StudentsController {
     constructor(studentsService: StudentsService) {
         this.studentsService = studentsService;
         this.router.post("/new", this.createStudent.bind(this));
-        this.router.get("/all/students", this.getAllStudents.bind(this));
+        this.router.get("/all", this.getAllStudents.bind(this));
         this.router.delete("/:studentid", this.deleteStudent.bind(this));
         this.router.get(HealthCheck.healthCheck, this.healthCheck.bind(this));
     }
 
     public async createStudent(request: Request, response: Response) {
         try {
+            console.log(request.body, "26rm");
             const { firstName, familyName, dob, email } = request.body;
             const validFirstName = isNonEmptyString(firstName);
             const validFamilyName = isNonEmptyString(familyName);
