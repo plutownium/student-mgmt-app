@@ -5,7 +5,6 @@ import express, { Request, Response } from "express";
 import { HealthCheck } from "../enum/healthCheck.enum";
 import NotificationService from "../service/notification.service";
 import { handleErrorResponse } from "../util/handleErrorResponse";
-import { isString, isStringInteger } from "../validationSchemas/inputValidation";
 
 class NotificationController {
     public path = "/notification";
@@ -21,8 +20,7 @@ class NotificationController {
 
     public async markRead(request: Request, response: Response) {
         try {
-
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -31,7 +29,7 @@ class NotificationController {
     public async getAllNotifications(request: Request, response: Response) {
         try {
             //
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -39,7 +37,7 @@ class NotificationController {
 
     public async deleteNotification(request: Request, response: Response) {
         try {
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }

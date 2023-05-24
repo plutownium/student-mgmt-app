@@ -5,7 +5,6 @@ import express, { Request, Response } from "express";
 import { HealthCheck } from "../enum/healthCheck.enum";
 import CourseService from "../service/course.service";
 import { handleErrorResponse } from "../util/handleErrorResponse";
-import { isString, isStringInteger } from "../validationSchemas/inputValidation";
 
 class CourseController {
     public path = "/course";
@@ -22,8 +21,7 @@ class CourseController {
 
     public async createCourse(request: Request, response: Response) {
         try {
-
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -32,7 +30,7 @@ class CourseController {
     public async getAllCourses(request: Request, response: Response) {
         try {
             //
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -40,7 +38,7 @@ class CourseController {
 
     public async deleteCourse(request: Request, response: Response) {
         try {
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
