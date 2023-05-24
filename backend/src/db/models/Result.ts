@@ -3,7 +3,7 @@ import { Course } from "./Course";
 import { Student } from "./Student";
 
 interface ResultAttributes {
-    resultId: number;
+    resultId?: number;
     courseId?: number | null;
     studentId?: number | null;
     score: string;
@@ -20,12 +20,10 @@ export class Result extends Model<ResultAttributes, ResultCreationAttributes> im
     public courseId!: ForeignKey<Course["courseId"]>;
     public studentId!: ForeignKey<Student["studentId"]>;
     public score!: string;
-    
+
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
     public readonly deletedAt!: Date;
-
-
 
     static initModel(sequelize: Sequelize): typeof Result {
         return Result.init(

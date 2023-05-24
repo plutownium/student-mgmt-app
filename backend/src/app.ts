@@ -22,9 +22,6 @@ class App {
                 credentials: true,
             }),
         );
-        this.app.use(bodyParser.json({ limit: "50mb" }));
-
-        // this.middlewares(appInit.middlewares);
         this.routes(appInit.controllers);
     }
 
@@ -49,7 +46,6 @@ class App {
 
     private routes(controllers: any) {
         controllers.forEach((controller: any) => {
-            // console.log(controller.path, "... is running");
             this.app.use(controller.path, controller.router);
         });
     }

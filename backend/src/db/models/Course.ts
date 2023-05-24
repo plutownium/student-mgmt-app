@@ -1,7 +1,7 @@
 import { DataTypes, Model, Sequelize, Optional, ForeignKey, Association, HasManyGetAssociationsMixin, HasManyAddAssociationMixin } from "sequelize";
 
 interface CourseAttributes {
-    courseId: number;
+    courseId?: number;
     name: string;
     createdAt?: Date;
     updatedAt?: Date;
@@ -18,7 +18,6 @@ export class Course extends Model<CourseAttributes, CourseCreationAttributes> im
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
     public readonly deletedAt!: Date;
-
 
     static initModel(sequelize: Sequelize): typeof Course {
         return Course.init(

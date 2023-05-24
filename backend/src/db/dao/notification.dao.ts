@@ -8,8 +8,12 @@ class NotificationDAO {
         return await Notification.create(notification);
     }
 
-    public async getAllNotifications(profileId: number): Promise<Notification[]> {
-        return await Notification.findAll({ include: { required: true, model: Notification, where: { profileId } } });
+    public async getAllUnreadNotifications(): Promise<Notification[]> {
+        return await Notification.findAll({ where: { seen: false } });
+    }
+
+    public async markRead(notificationId: number): Promise<void> {
+        await Notification.update({ seen: true }, { where: { notificationId } });
     }
 }
 

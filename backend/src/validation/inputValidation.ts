@@ -8,6 +8,8 @@ const dateSchema = z.date();
 const stringArr = z.array(z.string());
 const intArr = z.array(z.number());
 
+const validGrades = ["A", "B", "C", "D", "E", "F"];
+
 export function isNonEmptyString(testSubject: unknown): string {
     return nonEmptyString.parse(testSubject);
 }
@@ -36,13 +38,15 @@ export function isEmail(testSubject: unknown): string {
     return emailSchema.parse(testSubject);
 }
 
-// export function arrayIsAllStrings(testSubject: unknown[]): string[] {
-//     return stringArr.parse(testSubject);
-// }
-
-// export function arrayIsAllInteger(testSubject: unknown[]): number[] {
-//     return intArr.parse(testSubject);
-// }
+export function isValidGrade(testSubject: unknown): string {
+    const isString = stringSchema.parse(testSubject);
+    if (isString) {
+        if (validGrades.includes(isString)) {
+            return isString;
+        }
+    }
+    throw new Error("Invalid grade input");
+}
 
 export function isDate(testSubject: unknown): Date {
     return dateSchema.parse(testSubject);

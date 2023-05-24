@@ -8,8 +8,8 @@ class ResultDAO {
         return await Result.create(result);
     }
 
-    public async getAllResults(profileId: number): Promise<Result[]> {
-        return await Result.findAll({ include: { required: true, model: Result, where: { profileId } } });
+    public async getAllResults(): Promise<Result[]> {
+        return await Result.findAll();
     }
 }
 

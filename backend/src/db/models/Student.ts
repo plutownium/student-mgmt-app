@@ -1,7 +1,7 @@
 import { DataTypes, Model, Sequelize, Optional, ForeignKey, Association, HasManyGetAssociationsMixin, HasManyAddAssociationMixin } from "sequelize";
 
 interface StudentAttributes {
-    studentId: number;
+    studentId?: number;
     firstName: string;
     familyName: string;
     dob: Date;
@@ -24,8 +24,6 @@ export class Student extends Model<StudentAttributes, StudentCreationAttributes>
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
     public readonly deletedAt!: Date;
-
-
 
     static initModel(sequelize: Sequelize): typeof Student {
         return Student.init(
