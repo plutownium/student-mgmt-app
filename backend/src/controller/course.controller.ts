@@ -9,14 +9,14 @@ import { isNonEmptyString, isStringInteger } from "../validation/inputValidation
 import CourseDAO from "../db/dao/course.dao";
 
 class CourseController {
-    public path = "/course";
+    public path = "/courses";
     public router = express.Router();
     private courseService: CourseService;
 
     constructor(courseService: CourseService) {
         this.courseService = courseService;
         this.router.post("/new", this.createCourse.bind(this));
-        this.router.get("/all/course", this.getAllCourses.bind(this));
+        this.router.get("/all", this.getAllCourses.bind(this));
         this.router.delete("/:courseid", this.deleteCourse.bind(this));
         this.router.get(HealthCheck.healthCheck, this.healthCheck.bind(this));
     }

@@ -23,10 +23,10 @@ const notificationDAO = new NotificationDAO();
 const resultDAO = new ResultDAO();
 const studentsDAO = new StudentDAO();
 
-const courseService = new CourseService(courseDAO);
 const notificationService = new NotificationService(notificationDAO);
 const resultService = new ResultService(resultDAO);
-const studentsService = new StudentsService(notificationService, studentsDAO);
+const courseService = new CourseService(resultService, courseDAO);
+const studentsService = new StudentsService(notificationService, resultService, studentsDAO);
 
 const app = new App({
     port: port,

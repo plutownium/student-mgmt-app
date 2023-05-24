@@ -11,6 +11,14 @@ class ResultDAO {
     public async getAllResults(): Promise<Result[]> {
         return await Result.findAll();
     }
+
+    public async deleteAllRelatedToCourse(courseId: number): Promise<void> {
+        await Result.destroy({ where: { courseId } });
+    }
+
+    public async deleteAllRelatedToStudent(studentId: number): Promise<void> {
+        await Result.destroy({ where: { studentId } });
+    }
 }
 
 export default ResultDAO;

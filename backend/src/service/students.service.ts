@@ -3,12 +3,15 @@ import { IStudent } from "../interface/Student.interface";
 import { Student } from "../db/models/Student";
 import NotificationService from "./notification.service";
 import { studentIsAtLeastTen } from "../util/ageChecker";
+import ResultService from "./result.service";
 
 class StudentsService {
-    private studentsDAO: StudentsDAO;
     private notificationService: NotificationService;
-    constructor(notificationService: NotificationService, studentDAO: StudentsDAO) {
+    private resultService: ResultService;
+    private studentsDAO: StudentsDAO;
+    constructor(notificationService: NotificationService, resultService: ResultService, studentDAO: StudentsDAO) {
         this.notificationService = notificationService;
+        this.resultService = resultService;
         this.studentsDAO = studentDAO;
     }
 
@@ -26,6 +29,7 @@ class StudentsService {
     }
 
     public async deleteStudent(studentId: number): Promise<number> {
+        await this.resultService.deleteResultsForStudent(studentId);
         return await this.studentsDAO.deleteStudentById(studentId);
     }
 }

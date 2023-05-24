@@ -8,14 +8,14 @@ import { handleErrorResponse } from "../util/handleErrorResponse";
 import { isStringInteger } from "../validation/inputValidation";
 
 class NotificationController {
-    public path = "/notification";
+    public path = "/notifications";
     public router = express.Router();
     private notificationService: NotificationService;
 
     constructor(notificationService: NotificationService) {
         this.notificationService = notificationService;
         this.router.put("/read/:notificationid", this.markRead.bind(this));
-        this.router.get("/all/unread/notifications", this.getAllUnreadNotifications.bind(this));
+        this.router.get("/all/unread", this.getAllUnreadNotifications.bind(this));
         this.router.get(HealthCheck.healthCheck, this.healthCheck.bind(this));
     }
 

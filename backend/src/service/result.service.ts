@@ -21,6 +21,14 @@ class ResultService {
     public async getAllResults(): Promise<Result[]> {
         return await this.resultDAO.getAllResults();
     }
+
+    public async deleteResultsForStudent(studentId: number): Promise<void> {
+        return await this.resultDAO.deleteAllRelatedToStudent(studentId);
+    }
+
+    public async deleteResultsForCourse(courseId: number): Promise<void> {
+        return await this.resultDAO.deleteAllRelatedToCourse(courseId);
+    }
 }
 
 export default ResultService;
