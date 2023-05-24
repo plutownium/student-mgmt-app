@@ -23,8 +23,6 @@ function initModels(sequelize: Sequelize) {
     });
     Result.belongsTo(Result, { as: "result_for_student", foreignKey: "studentId" });
 
-    
-
     return { Result, Course, Student, Notification };
 }
 

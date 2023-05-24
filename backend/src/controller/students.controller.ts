@@ -6,6 +6,7 @@ import { HealthCheck } from "../enum/healthCheck.enum";
 import StudentsService from "../service/students.service";
 import { handleErrorResponse } from "../util/handleErrorResponse";
 import { isString, isStringInteger } from "../validationSchemas/inputValidation";
+import { isDate, isEmail, isNonEmptyString } from "../validation/inputValidation";
 
 class StudentsController {
     public path = "/students";
@@ -22,8 +23,18 @@ class StudentsController {
 
     public async createStudent(request: Request, response: Response) {
         try {
-
-            return response.status(200).json({  });
+            const { firstName, familyName, dob, email } = request.body;
+            const validFirstName = isNonEmptyString(firstName);
+            const validFamilyName = isNonEmptyString(familyName);
+            const validDOB = isDate(dob);
+            const validEmail = isEmail(email);
+            const newStudent = await this.studentsService.createStudent({
+                firstName: validFirstName,
+                familyName: validFamilyName,
+                dob: validDOB,
+                email: validEmail,
+            });
+            return response.status(200).json({ newStudent });
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -31,8 +42,8 @@ class StudentsController {
 
     public async getAllStudents(request: Request, response: Response) {
         try {
-            //
-            return response.status(200).json({  });
+            const allStudents = await this.studentsService.getAllStudents();
+            return response.status(200).json({ allStudents });
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -40,7 +51,10 @@ class StudentsController {
 
     public async deleteStudent(request: Request, response: Response) {
         try {
-            return response.status(200).json({  });
+            const studentIdInput = request.params.studentid;
+            const studentId = isStringInteger(studentIdInput);
+            const deletedStudent = await this.studentsService.deleteStudent(studentId);
+            return response.status(200).json({ deletedStudent });
         } catch (err) {
             return handleErrorResponse(response, err);
         }
