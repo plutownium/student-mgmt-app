@@ -10,14 +10,23 @@ import CourseService from "./service/course.service";
 import NotificationService from "./service/notification.service";
 import ResultService from "./service/result.service";
 import StudentsService from "./service/students.service";
+import CourseDAO from "./db/dao/course.dao";
+import NotificationDAO from "./db/dao/notification.dao";
+import ResultDAO from "./db/dao/result.dao";
+import StudentDAO from "./db/dao/students.dao";
 
 // const app: Express = express();
 const port = 3000;
 
-const courseService = new CourseService();
-const notificationService = new NotificationService();
-const resultService = new ResultService();
-const studentsService = new StudentsService();
+const courseDAO = new CourseDAO();
+const notificationDAO = new NotificationDAO();
+const resultDAO = new ResultDAO();
+const studentsDAO = new StudentDAO();
+
+const courseService = new CourseService(courseDAO);
+const notificationService = new NotificationService(notificationDAO);
+const resultService = new ResultService(resultDAO);
+const studentsService = new StudentsService(notificationService, studentsDAO);
 
 const app = new App({
     port: port,
@@ -32,13 +41,3 @@ const app = new App({
 });
 
 app.listen();
-
-// app.get("/", (req: Request, res: Response) => {
-//     res.send("Express + TypeScript Server Online");
-// });
-
-// app.use("/api", apiRoutes);
-
-app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});

@@ -7,8 +7,18 @@ class NotificationService {
         this.notificationDAO = notificationDAO;
     }
 
-    public async makeNotification(text: string): Promise<void> {
-        //
+    public async makeNewStudentNotification(firstName: string, familyName: string): Promise<void> {
+        const notificationText = "A new student named " + firstName + " " + familyName + " was added!";
+        this.makeNotification(notificationText);
+    }
+
+    public async makeNewCourseNotification(courseName: string): Promise<void> {
+        const notificationText = "A new course named " + courseName + " was added!";
+        this.makeNotification(notificationText);
+    }
+
+    private async makeNotification(text: string): Promise<void> {
+        await this.notificationDAO.createNotification({ text, seen: false });
     }
 }
 

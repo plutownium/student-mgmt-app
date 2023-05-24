@@ -5,8 +5,8 @@ import express, { Request, Response } from "express";
 import { HealthCheck } from "../enum/healthCheck.enum";
 import StudentsService from "../service/students.service";
 import { handleErrorResponse } from "../util/handleErrorResponse";
-import { isString, isStringInteger } from "../validationSchemas/inputValidation";
-import { isDate, isEmail, isNonEmptyString } from "../validation/inputValidation";
+
+import { isDate, isEmail, isNonEmptyString, isStringInteger } from "../validation/inputValidation";
 
 class StudentsController {
     public path = "/students";

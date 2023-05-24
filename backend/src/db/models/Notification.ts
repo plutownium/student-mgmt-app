@@ -1,7 +1,7 @@
 import { DataTypes, Model, Sequelize, Optional, ForeignKey, Association, HasManyGetAssociationsMixin, HasManyAddAssociationMixin } from "sequelize";
 
 interface NotificationAttributes {
-    notificationId: number;
+    notificationId?: number;
     text: string;
     seen: boolean;
     createdAt?: Date;
@@ -21,7 +21,6 @@ export class Notification extends Model<NotificationAttributes, NotificationCrea
     public readonly updatedAt!: Date;
     public readonly deletedAt!: Date;
 
-
     static initModel(sequelize: Sequelize): typeof Notification {
         return Notification.init(
             {
@@ -36,8 +35,8 @@ export class Notification extends Model<NotificationAttributes, NotificationCrea
                 },
                 seen: {
                     type: DataTypes.BOOLEAN,
-                    allowNull: false
-                }
+                    allowNull: false,
+                },
             },
             {
                 timestamps: true,

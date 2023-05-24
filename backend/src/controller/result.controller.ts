@@ -5,7 +5,6 @@ import express, { Request, Response } from "express";
 import { HealthCheck } from "../enum/healthCheck.enum";
 import ResultService from "../service/result.service";
 import { handleErrorResponse } from "../util/handleErrorResponse";
-import { isString, isStringInteger } from "../validationSchemas/inputValidation";
 
 class ResultController {
     public path = "/result";
@@ -21,8 +20,7 @@ class ResultController {
 
     public async createResult(request: Request, response: Response) {
         try {
-
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -31,7 +29,7 @@ class ResultController {
     public async getAllResult(request: Request, response: Response) {
         try {
             //
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
@@ -39,7 +37,7 @@ class ResultController {
 
     public async deleteResult(request: Request, response: Response) {
         try {
-            return response.status(200).json({  });
+            return response.status(200).json({});
         } catch (err) {
             return handleErrorResponse(response, err);
         }
