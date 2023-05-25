@@ -15,6 +15,8 @@ function AddStudentsPage() {
     const [dob, setDOB] = useState("");
     const [email, setEmail] = useState("");
 
+    const [enabledSubmit, setEnabledSubmit] = useState(false);
+
     const [err, setErr] = useState("");
 
     const { updateNotifications } = useContext(NotificationsContext);
@@ -38,6 +40,14 @@ function AddStudentsPage() {
         }
     }
 
+    function recheckValidInputs() {
+        if (firstName.length > 0 && familyName.length > 0 && dob !== "" && email.length > 0) {
+            setEnabledSubmit(true);
+        } else {
+            setEnabledSubmit(false);
+        }
+    }
+
     function clearAllTheControls() {
         setFirstName("");
         setFamilyName("");
@@ -48,18 +58,22 @@ function AddStudentsPage() {
 
     function handleUpdateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
         setFirstName(event.target.value);
+        recheckValidInputs();
     }
 
     function handleUpdateFamilyName(event: React.ChangeEvent<HTMLInputElement>) {
         setFamilyName(event.target.value);
+        recheckValidInputs();
     }
 
     function handleUpdateDOB(event: React.ChangeEvent<HTMLInputElement>) {
         setDOB(event.target.value);
+        recheckValidInputs();
     }
 
     function handleUpdateEmail(event: React.ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value);
+        recheckValidInputs();
     }
 
     return (
@@ -76,10 +90,12 @@ function AddStudentsPage() {
                             {/* // err msg container */}
                             <p>{err ? "Error: " + err : ""}</p>
                         </div>
-                        <div className="py-2 px-3 rounded-md bg-slate-100 border-2 border-slate-300">
+                        <div className="rounded-md bg-slate-100 border-2 border-slate-300">
                             <input
+                                className="py-2 px-3 w-full h-full disabled:text-slate-300"
                                 type="submit"
                                 value="Submit"
+                                disabled={!enabledSubmit}
                                 onClick={e => {
                                     handleSubmitNewStudent(e);
                                 }}
