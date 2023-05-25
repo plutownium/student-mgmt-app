@@ -19,21 +19,13 @@ const Sidebar: React.FC<{}> = () => {
         }
     }
 
-    const [activeItem, setActiveItem] = useState(getLocation(location.pathname));
-
-    const navigate = useNavigate();
+    const [activeItem, setActiveItem] = useState(1);
 
     return (
-        <div>
+        <div className="pt-12">
             <div className="h-full flex flex-col justify-between">
                 <div>
-                    <div className="hidden md:block">
-                        <div className={`pl-6 pt-4 pb-8 text-left`}>
-                            <h3 className="blueText logoText">Logo</h3>
-                        </div>
-                    </div>
-
-                    <div className="pb-11 pt-8">
+                    <div className="">
                         <MenuItem
                             changeActiveItem={() => {
                                 console.log(1);
@@ -72,30 +64,30 @@ const Sidebar: React.FC<{}> = () => {
                         />
                         <MenuItem
                             changeActiveItem={() => {
-                                console.log(4);
-                                setActiveItem(4);
+                                console.log(5);
+                                setActiveItem(5);
                             }}
                             location={"/courses/list"}
                             text={"Courses List"}
-                            active={activeItem === 4}
+                            active={activeItem === 5}
                         />
                         <MenuItem
                             changeActiveItem={() => {
-                                console.log(4);
-                                setActiveItem(4);
+                                console.log(6);
+                                setActiveItem(6);
                             }}
                             location={"/results/add/new"}
                             text={"Add New Results"}
-                            active={activeItem === 4}
+                            active={activeItem === 6}
                         />
                         <MenuItem
                             changeActiveItem={() => {
-                                console.log(4);
-                                setActiveItem(4);
+                                console.log(7);
+                                setActiveItem(7);
                             }}
                             location={"/results/list"}
                             text={"Results List"}
-                            active={activeItem === 4}
+                            active={activeItem === 7}
                         />
                     </div>
                 </div>
