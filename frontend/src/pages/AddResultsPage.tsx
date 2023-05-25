@@ -55,6 +55,7 @@ function AddResultsPage() {
             await submitNewResultAPI(studentId, courseId, grade);
             updateNotifications();
             clearAllTheControls();
+            setEnabledSubmit(false);
         } catch (err) {
             console.log(err, "59rm");
             unwrapAndSetErr(err, setErr);

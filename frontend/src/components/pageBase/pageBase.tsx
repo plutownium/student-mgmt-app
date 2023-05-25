@@ -18,12 +18,12 @@ const PageBase: React.FC<PageProps> = ({ children }: PageProps) => {
                 </div>
             </div>
             <div className="flex">
-                <div id="sideBar" className="w-72 border-4 border-black">
+                <div id="sideBar" className="w-72 bg-zinc-100">
                     <div className={``}>
                         <Sidebar />
                     </div>
                 </div>
-                <div className="w-full border-4 border-red-500">{children}</div>
+                <div className="w-full ">{children}</div>
             </div>
         </div>
     );

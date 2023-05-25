@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import React from "react";
 import MenuItem from "./components/MenuItem";
 
 const Sidebar: React.FC<{}> = () => {

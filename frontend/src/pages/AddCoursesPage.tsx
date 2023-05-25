@@ -35,6 +35,7 @@ function AddCoursesPage() {
             await makeCourseAPI(courseName);
             updateNotifications();
             clearAllTheControls();
+            setEnabledSubmit(false);
         } catch (err) {
             unwrapAndSetErr(err, setErr);
         }
@@ -49,7 +50,7 @@ function AddCoursesPage() {
         <PageBase>
             <div>
                 <form>
-                    <div className="mt-12 flex flex-col items-center border-2 border-blue-500">
+                    <div className="mt-12 flex flex-col items-center ">
                         <TextFormInput labelText="Course name" formText={courseName} inputName="course-name" handleUpdate={handleUpdateCourseName} />
 
                         <div className="h-12 p-2">

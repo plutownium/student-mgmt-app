@@ -32,6 +32,7 @@ function AddStudentsPage() {
             await addNewStudentAPI(firstName, familyName, dob, email);
             updateNotifications();
             clearAllTheControls();
+            setEnabledSubmit(false);
         } catch (err) {
             unwrapAndSetErr(err, setErr);
         }
@@ -77,7 +78,7 @@ function AddStudentsPage() {
         <PageBase>
             <div>
                 <form>
-                    <div className="mt-12 flex flex-col items-center border-2 border-blue-500">
+                    <div className="mt-12 flex flex-col items-center ">
                         <TextFormInput labelText="First name" formText={firstName} inputName="first-name" handleUpdate={handleUpdateFirstName} />
                         <TextFormInput labelText="Family name" formText={familyName} inputName="family-name" handleUpdate={handleUpdateFamilyName} />
                         <DateFormInput labelText="DOB" formText={dob} inputName="date" handleUpdate={handleUpdateDOB} />
@@ -87,7 +88,7 @@ function AddStudentsPage() {
                             {/* // err msg container */}
                             <p>{err ? "Error: " + err : ""}</p>
                         </div>
-                        <div className="rounded-md bg-slate-100 border-2 border-slate-300">
+                        <div className="rounded-md bg-slate-100 ">
                             <input
                                 className="py-2 px-3 w-full h-full disabled:text-slate-300"
                                 type="submit"

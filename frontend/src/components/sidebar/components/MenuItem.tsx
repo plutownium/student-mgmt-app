@@ -13,7 +13,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ text, location, changeActiveItem, c
         <Link to={location}>
             <div
                 onClick={changeActiveItem ? changeActiveItem : closeSidebar}
-                className={`menuItemContainer flex flex-start pl-12 py-4 hover:bg-slate-100`}
+                className={`menuItemContainer flex flex-start pl-12 py-4 hover:bg-sky-100`}
             >
                 <p className={`menuItemText text-black `}>{text}</p>
             </div>

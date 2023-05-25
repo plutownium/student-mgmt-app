@@ -43,7 +43,7 @@ class ResultService {
             const student = await this.studentDAO.getStudentById(target.studentId);
             const course = await this.courseDAO.getCourseById(target.courseId);
             if (student === null || course === null) {
-                continue; // ignore it
+                continue; // ignore it; should never happen as the app is so small
             }
             const withAssociation: IResultWithAssociations = {
                 resultId: target.resultId,
