@@ -9,11 +9,11 @@ interface FormInputProps {
 
 const DateFormInput: React.FC<FormInputProps> = ({ labelText, formText, inputName, handleUpdate }: FormInputProps) => {
     return (
-        <div className="pt-2 pb-1 flex w-1/2 flex">
-            <div className="w-1/5 flex">
-                <label className="">{labelText}</label>
+        <div className="pt-2 pb-1 flex w-2/3 flex">
+            <div className="w-1/4 flex items-center">
+                <label className="flex items-center">{labelText}</label>
             </div>
-            <div className="w-4/5 rounded-md border border-slate-400">
+            <div className="w-3/4 rounded-md border border-slate-400">
                 <input
                     className="w-full p-1 rounded-md"
                     type="date"

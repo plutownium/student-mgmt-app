@@ -8,6 +8,7 @@ import TextFormInput from "../components/formInput/TextFormInput";
 import DateFormInput from "../components/formInput/DateFormInput";
 import { PredictableErrorResponse } from "../interface/PredictableErrorResponse.interface";
 import { NotificationsContext, useNotificationsContext } from "../context/NotificationsContext";
+import { unwrapAndSetErr } from "../util/errUnwrapper";
 
 function AddStudentsPage() {
     const [firstName, setFirstName] = useState("");
@@ -33,10 +34,7 @@ function AddStudentsPage() {
             // todo: expect a notification! perhaps query the backend?
             clearAllTheControls();
         } catch (err) {
-            const axiosErr = err as AxiosError;
-            const errMsgContent = axiosErr.response?.data as PredictableErrorResponse;
-            const reasonForFailure = errMsgContent.error.message;
-            setErr(reasonForFailure);
+            unwrapAndSetErr(err, setErr);
         }
     }
 
@@ -79,7 +77,7 @@ function AddStudentsPage() {
     return (
         <PageBase>
             <div>
-                <form id="student-create-form">
+                <form>
                     <div className="mt-12 flex flex-col items-center border-2 border-blue-500">
                         <TextFormInput labelText="First name" formText={firstName} inputName="first-name" handleUpdate={handleUpdateFirstName} />
                         <TextFormInput labelText="Family name" formText={familyName} inputName="family-name" handleUpdate={handleUpdateFamilyName} />
