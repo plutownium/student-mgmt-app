@@ -31,7 +31,7 @@ const Sidebar: React.FC<{}> = () => {
                                 console.log(1);
                                 setActiveItem(1);
                             }}
-                            location="/home"
+                            location="/"
                             text={"Home"}
                             active={activeItem === 1}
                         />
