@@ -18,7 +18,7 @@ function AddStudentsPage() {
 
     async function handleSubmitNewStudent(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
         e.preventDefault();
-        if (dob === null) {
+        if (dob === "") {
             setErr("Must choose a date of birth");
             return;
         }
@@ -40,6 +40,7 @@ function AddStudentsPage() {
         setFamilyName("");
         setDOB("");
         setEmail("");
+        setErr(""); // clear old error msg
     }
 
     function handleUpdateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -68,6 +69,10 @@ function AddStudentsPage() {
                         <DateFormInput labelText="DOB" formText={dob} inputName="date" handleUpdate={handleUpdateDOB} />
                         <TextFormInput labelText="Email" formText={email} inputName="email" handleUpdate={handleUpdateEmail} />
 
+                        <div className="h-12 p-2">
+                            {/* // err msg container */}
+                            <p>{err ? "Error: " + err : ""}</p>
+                        </div>
                         <div className="py-2 px-3 rounded-md bg-slate-100 border-2 border-slate-300">
                             <input
                                 type="submit"
