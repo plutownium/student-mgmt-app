@@ -5,9 +5,9 @@ function HomePage() {
     console.log("on the home page");
     return (
         <PageBase>
-            <div>
+            <div className="pt-12">
                 <h1>
-                    Welcome to Roland's <br />
+                    Roland's <br />
                     Development Technical Test <br />
                     (Extended Version)
                 </h1>
