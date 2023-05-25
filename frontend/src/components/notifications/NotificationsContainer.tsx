@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 // import { getAllUnreadNotifications } from "../../api/notificationsAPI";
 import { NotificationsContext } from "../../context/NotificationsContext";
 import NotificationsList from "./NotificationsList";
-import DropdownContainer from "./dropdown/DropdownContainer";
+import DropdownContainer from "../dropdown/DropdownContainer";
 
 const NotificationContainer: React.FC<{}> = () => {
     // const [notifications, setNotifications] = useState<INotification[]>([]);

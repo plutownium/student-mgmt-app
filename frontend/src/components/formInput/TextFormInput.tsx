@@ -1,13 +1,13 @@
 import React, { ChangeEvent } from "react";
 
-interface FormInputProps {
+interface TextFormInputProps {
     labelText: string;
     formText: string;
     inputName: string;
     handleUpdate: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextFormInput: React.FC<FormInputProps> = ({ labelText, formText, inputName, handleUpdate }: FormInputProps) => {
+const TextFormInput: React.FC<TextFormInputProps> = ({ labelText, formText, inputName, handleUpdate }: TextFormInputProps) => {
     return (
         <div className="pt-2 pb-1 flex w-2/3 flex">
             <div className="w-1/4 flex">

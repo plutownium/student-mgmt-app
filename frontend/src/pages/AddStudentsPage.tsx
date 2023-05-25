@@ -31,7 +31,6 @@ function AddStudentsPage() {
         try {
             await addNewStudentAPI(firstName, familyName, dob, email);
             updateNotifications();
-            // todo: expect a notification! perhaps query the backend?
             clearAllTheControls();
         } catch (err) {
             unwrapAndSetErr(err, setErr);
