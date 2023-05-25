@@ -17,6 +17,11 @@ class NotificationService {
         this.makeNotification(notificationText);
     }
 
+    public async makeNewResultNotification(studentName: string, courseName: string, grade: string): Promise<void> {
+        const notificationText = `New result for ${studentName} with ${courseName}: grade ${grade}`;
+        this.makeNotification(notificationText);
+    }
+
     public async getAllUnreadNotifications(): Promise<Notification[]> {
         return await this.notificationDAO.getAllUnreadNotifications();
     }

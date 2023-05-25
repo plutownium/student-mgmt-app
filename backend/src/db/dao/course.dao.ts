@@ -11,6 +11,10 @@ class CourseDAO {
         return await Course.findAll();
     }
 
+    public async getCourseById(courseId: number): Promise<Course | null> {
+        return await Course.findByPk(courseId);
+    }
+
     public async deleteCourseById(courseId: number): Promise<number> {
         return await Course.destroy({ where: { courseId } });
     }
