@@ -33,7 +33,6 @@ function StudentsListPage() {
 
     function formatDOB(dateToFormat: Date): string {
         const YYYYMMDD = dateToFormat.toString().split("T")[0];
-        console.log(YYYYMMDD);
         const split = YYYYMMDD.split("-");
         const formatted = split[2] + "/" + split[1] + "/" + split[0];
         return formatted;
@@ -44,31 +43,35 @@ function StudentsListPage() {
             <div>
                 <div>Students List Page</div>
                 <div>
-                    <div>
-                        <tr>
-                            <th>Name & Family name</th>
-                            <th>DOB</th>
-                            <th>Email</th>
-                            <th>Delete</th>
-                        </tr>
-                        {studentsList.map((student: IStudent) => {
-                            const fullName = student.firstName + " " + student.familyName;
-                            return (
+                    <div className="w-fit ml-8 px-4 pt-2 pb-1 border border-black">
+                        <table>
+                            <tbody>
                                 <tr>
-                                    <td>{fullName}</td>
-                                    <td>{formatDOB(student.dob)}</td>
-                                    <td>{student.email}</td>
-                                    <td>
-                                        <DeleteButton
-                                            id={student.studentId}
-                                            callDelete={() => {
-                                                callDeleteForStudent(student.studentId);
-                                            }}
-                                        />
-                                    </td>
+                                    <th>Name & Family name</th>
+                                    <th>DOB</th>
+                                    <th>Email</th>
+                                    <th>Delete</th>
                                 </tr>
-                            );
-                        })}
+                                {studentsList.map((student: IStudent) => {
+                                    const fullName = student.firstName + " " + student.familyName;
+                                    return (
+                                        <tr key={student.studentId}>
+                                            <td>{fullName}</td>
+                                            <td>{formatDOB(student.dob)}</td>
+                                            <td>{student.email}</td>
+                                            <td>
+                                                <DeleteButton
+                                                    id={student.studentId}
+                                                    callDelete={() => {
+                                                        callDeleteForStudent(student.studentId);
+                                                    }}
+                                                />
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
