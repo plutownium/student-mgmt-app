@@ -8,12 +8,12 @@ class NotificationService {
     }
 
     public async makeNewStudentNotification(firstName: string, familyName: string): Promise<void> {
-        const notificationText = "A new student named " + firstName + " " + familyName + " was added!";
+        const notificationText = "New student named " + firstName + " " + familyName + "!";
         this.makeNotification(notificationText);
     }
 
     public async makeNewCourseNotification(courseName: string): Promise<void> {
-        const notificationText = "A new course named " + courseName + " was added!";
+        const notificationText = "Course added: " + courseName;
         this.makeNotification(notificationText);
     }
 
