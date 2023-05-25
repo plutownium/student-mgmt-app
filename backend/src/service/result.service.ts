@@ -2,7 +2,7 @@ import CourseDAO from "../db/dao/course.dao";
 import ResultDAO from "../db/dao/result.dao";
 import StudentsDAO from "../db/dao/students.dao";
 import { Result } from "../db/models/Result";
-import { IResult } from "../interface/Result.interface";
+import { IResult, IResultWithAssociations } from "../interface/Result.interface";
 import NotificationService from "./notification.service";
 
 class ResultService {
@@ -35,8 +35,27 @@ class ResultService {
         }
     }
 
-    public async getAllResults(): Promise<Result[]> {
-        return await this.resultDAO.getAllResults();
+    public async getAllResults(): Promise<IResultWithAssociations[]> {
+        const results = await this.resultDAO.getAllResults();
+        const resultsWithNames = [];
+        for (let i = 0; i < results.length; i++) {
+            const target = results[i];
+            const student = await this.studentDAO.getStudentById(target.studentId);
+            const course = await this.courseDAO.getCourseById(target.courseId);
+            if (student === null || course === null) {
+                continue; // ignore it
+            }
+            const withAssociation: IResultWithAssociations = {
+                resultId: target.resultId,
+                courseId: target.courseId,
+                studentId: target.studentId,
+                courseName: course.name,
+                studentName: student.firstName + " " + student.familyName,
+                score: target.score,
+            };
+            resultsWithNames.push(withAssociation);
+        }
+        return resultsWithNames;
     }
 
     public async deleteResultsForStudent(studentId: number): Promise<void> {
