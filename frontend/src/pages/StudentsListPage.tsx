@@ -10,7 +10,6 @@ function StudentsListPage() {
 
     useEffect(() => {
         getStudentsAPI().then(response => {
-            console.log(response, "11rm");
             const students = response.data.allStudents;
             setStudentsList(students);
             console.log(students);
@@ -42,7 +41,6 @@ function StudentsListPage() {
     return (
         <PageBase>
             <div>
-                <div>Students List Page</div>
                 <div>
                     <div className="w-fit ml-8 px-4 pt-2 pb-1 border border-black">
                         <table>
