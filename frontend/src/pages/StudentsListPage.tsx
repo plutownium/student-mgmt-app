@@ -18,6 +18,7 @@ function StudentsListPage() {
     }, []);
 
     function callDeleteForStudent(studentId: number) {
+        console.log("removing student with id", studentId);
         deleteStudentAPI(studentId);
         removeStudentFromList(studentId);
     }

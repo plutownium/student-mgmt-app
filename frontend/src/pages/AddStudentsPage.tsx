@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { AxiosError } from "axios";
 
 import PageBase from "../components/pageBase/pageBase";
@@ -7,6 +7,7 @@ import { addNewStudentAPI } from "../api/studentsAPI";
 import TextFormInput from "../components/formInput/TextFormInput";
 import DateFormInput from "../components/formInput/DateFormInput";
 import { PredictableErrorResponse } from "../interface/PredictableErrorResponse.interface";
+import { NotificationsContext, useNotificationsContext } from "../context/NotificationsContext";
 
 function AddStudentsPage() {
     const [firstName, setFirstName] = useState("");
@@ -16,6 +17,8 @@ function AddStudentsPage() {
 
     const [err, setErr] = useState("");
 
+    const { updateNotifications } = useContext(NotificationsContext);
+
     async function handleSubmitNewStudent(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
         e.preventDefault();
         if (dob === "") {
@@ -24,7 +27,7 @@ function AddStudentsPage() {
         }
         try {
             await addNewStudentAPI(firstName, familyName, dob, email);
-            // updateNotifications()
+            updateNotifications();
             // todo: expect a notification! perhaps query the backend?
             clearAllTheControls();
         } catch (err) {
