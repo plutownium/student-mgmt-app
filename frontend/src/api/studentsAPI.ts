@@ -1,14 +1,14 @@
 import axios from "axios";
 import { BACKEND_URL } from "../util/constants";
 
-export function makeStudentAPI(firstName: string, familyName: string, dob: Date, email: string) {
-    return axios.post(BACKEND_URL + "/students/new", { firstName, familyName, dob, email });
+export async function addNewStudentAPI(firstName: string, familyName: string, dob: string, email: string) {
+    return await axios.post(BACKEND_URL + "/students/new", { firstName, familyName, dob, email });
 }
 
-export function getStudentsAPI() {
-    return axios.get(BACKEND_URL + "/students/all");
+export async function getStudentsAPI() {
+    return await axios.get(BACKEND_URL + "/students/all");
 }
 
-export function deleteStudentAPI(studentId: number) {
-    return axios.delete(BACKEND_URL + "/students/" + studentId.toString());
+export async function deleteStudentAPI(studentId: number) {
+    return await axios.delete(BACKEND_URL + "/students/" + studentId.toString());
 }

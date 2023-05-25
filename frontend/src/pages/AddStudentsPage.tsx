@@ -1,51 +1,82 @@
 import React, { useState } from "react";
+import { AxiosError } from "axios";
 
 import PageBase from "../components/pageBase/pageBase";
+
+import { addNewStudentAPI } from "../api/studentsAPI";
+import TextFormInput from "../components/formInput/TextFormInput";
+import DateFormInput from "../components/formInput/DateFormInput";
+import { PredictableErrorResponse } from "../interface/PredictableErrorResponse.interface";
 
 function AddStudentsPage() {
     const [firstName, setFirstName] = useState("");
     const [familyName, setFamilyName] = useState("");
-    const [dob, setDOB] = useState<null | Date>(null);
+    const [dob, setDOB] = useState("");
     const [email, setEmail] = useState("");
 
-    function isValidEmail(testValue: string) {
-        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        return testValue.match(emailRegex);
+    const [err, setErr] = useState("");
+
+    async function handleSubmitNewStudent(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
+        e.preventDefault();
+        if (dob === null) {
+            setErr("Must choose a date of birth");
+            return;
+        }
+        try {
+            await addNewStudentAPI(firstName, familyName, dob, email);
+            // updateNotifications()
+            // todo: expect a notification! perhaps query the backend?
+            clearAllTheControls();
+        } catch (err) {
+            const axiosErr = err as AxiosError;
+            const errMsgContent = axiosErr.response?.data as PredictableErrorResponse;
+            const reasonForFailure = errMsgContent.error.message;
+            setErr(reasonForFailure);
+        }
     }
 
-    function isValidAge(testValue: Date) {}
+    function clearAllTheControls() {
+        setFirstName("");
+        setFamilyName("");
+        setDOB("");
+        setEmail("");
+    }
+
+    function handleUpdateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
+        setFirstName(event.target.value);
+    }
+
+    function handleUpdateFamilyName(event: React.ChangeEvent<HTMLInputElement>) {
+        setFamilyName(event.target.value);
+    }
+
+    function handleUpdateDOB(event: React.ChangeEvent<HTMLInputElement>) {
+        setDOB(event.target.value);
+    }
+
+    function handleUpdateEmail(event: React.ChangeEvent<HTMLInputElement>) {
+        setEmail(event.target.value);
+    }
 
     return (
         <PageBase>
             <div>
-                <form>
-                    <div>
-                        <div>
-                            <label>
-                                First name:
-                                <input type="text" name="first-name" />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Family name:
-                                <input type="text" name="family-name" />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Date of birth:
-                                <input type="date" name="dob" />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Email:
-                                <input type="text" name="email" />
-                            </label>
-                        </div>
+                <form id="student-create-form">
+                    <div className="mt-12 flex flex-col items-center border-2 border-blue-500">
+                        <TextFormInput labelText="First name" formText={firstName} inputName="first-name" handleUpdate={handleUpdateFirstName} />
+                        <TextFormInput labelText="Family name" formText={familyName} inputName="family-name" handleUpdate={handleUpdateFamilyName} />
+                        <DateFormInput labelText="DOB" formText={dob} inputName="date" handleUpdate={handleUpdateDOB} />
+                        <TextFormInput labelText="Email" formText={email} inputName="email" handleUpdate={handleUpdateEmail} />
 
-                        <input type="submit" value="Submit" />
+                        <div className="py-2 px-3 rounded-md bg-slate-100 border-2 border-slate-300">
+                            <input
+                                type="submit"
+                                value="Submit"
+                                onClick={e => {
+                                    handleSubmitNewStudent(e);
+                                }}
+                            />
+                        </div>
                     </div>
                 </form>
             </div>
