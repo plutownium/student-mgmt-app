@@ -24,7 +24,7 @@ const resultDAO = new ResultDAO();
 const studentsDAO = new StudentDAO();
 
 const notificationService = new NotificationService(notificationDAO);
-const resultService = new ResultService(resultDAO);
+const resultService = new ResultService(notificationService, resultDAO, studentsDAO, courseDAO);
 const courseService = new CourseService(notificationService, resultService, courseDAO);
 const studentsService = new StudentsService(notificationService, resultService, studentsDAO);
 
