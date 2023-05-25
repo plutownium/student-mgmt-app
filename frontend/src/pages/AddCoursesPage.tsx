@@ -1,7 +1,13 @@
 import React from "react";
 
+import PageBase from "../components/pageBase/pageBase";
+
 function AddCoursesPage() {
-    return <div>Add Courses Page</div>;
+    return (
+        <PageBase>
+            <div>Add Courses Page</div>
+        </PageBase>
+    );
 }
 
 export default AddCoursesPage;
