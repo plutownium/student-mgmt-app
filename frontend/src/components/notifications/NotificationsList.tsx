@@ -10,7 +10,14 @@ const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({ notificat
     return (
         <div>
             {notifications.map((notification: INotification) => {
-                return <Notification notificationId={notification.notificationId} text={notification.text} seen={notification.seen} />;
+                return (
+                    <Notification
+                        key={notification.notificationId}
+                        notificationId={notification.notificationId}
+                        text={notification.text}
+                        seen={notification.seen}
+                    />
+                );
             })}
         </div>
     );
