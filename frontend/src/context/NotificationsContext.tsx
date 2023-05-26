@@ -36,7 +36,6 @@ const NotificationsProvider: React.FC<ChildrenProps> = ({ children }) => {
 
     function updateNotifications() {
         getAllUnreadNotificationsAPI().then(response => {
-            console.log(response, "12rm");
             const unread = response.data.unread;
             setNotifications(unread);
             const counted = unread.length;

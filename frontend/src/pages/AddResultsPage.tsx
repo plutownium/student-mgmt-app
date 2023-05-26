@@ -57,7 +57,6 @@ function AddResultsPage() {
             clearAllTheControls();
             setEnabledSubmit(false);
         } catch (err) {
-            console.log(err, "59rm");
             unwrapAndSetErr(err, setErr);
         }
     }
@@ -71,7 +70,6 @@ function AddResultsPage() {
     }
 
     function recheckValidInputs(studentId: number | null, courseId: number | null, grade: string) {
-        console.log(studentId, courseId, grade, "73rm");
         if (studentId !== null && courseId !== null && grade !== "") {
             setEnabledSubmit(true);
         } else {
@@ -80,11 +78,6 @@ function AddResultsPage() {
     }
 
     function handleChooseStudent(chosenStudentId: number) {
-        // console.log(event, "80rm");
-        // if (event.target === null) {
-        // throw new Error("null value error");
-        // }
-        // const chosenStudentId = parseInt(event.target.value, 10);
         const chosenStudent = studentsList.find(student => student.studentId === chosenStudentId);
         if (!chosenStudent) {
             return; // should never happen; appeasing typescript
